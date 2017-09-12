@@ -20,7 +20,13 @@ export default {
         .throws(_=> Observable.from(null), TypeError)
         ._("Undefined is not allowed")
         .throws(_=> Observable.from(undefined), TypeError)
-        .throws(_=> Observable.from(), TypeError);
+        .throws(_=> Observable.from(), TypeError)
+        ._("Number is not allowed")
+        .throws(_=> Observable.from(0), TypeError)
+        ._("Boolean is not allowed")
+        .throws(_=> Observable.from(true), TypeError)
+        ._("String is allowed since it is iterable")
+        .not().throws(_=> Observable.from("abc"));
     },
 
     "Uses the this value if it's a function" (test, { Observable }) {
